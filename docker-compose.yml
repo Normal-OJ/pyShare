@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  caddy:
+    image: abiosoft/caddy
+    environment:
+      - ACME_AGREE=true
+
+  mongo:
+    image: mongo
+    volumes:
+      - ./MongoDB:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+
+  vue:
+    build: ./pyShare-fe
+
+  web:
+    build: ./pyShare-be
+    environment:
+      - MONGO_HOST=mongo
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+  sandbox:
+    build: ./pyShare-sandbox
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./pyShare-sandbox/submissions:/app/submissions
+      - ./pyShare-sandbox/submissions.bk:/app/submissions.bk
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis-data:/var/lib/redis
