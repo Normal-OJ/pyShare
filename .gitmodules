@@ -1,0 +1,9 @@
+[submodule "pyShare-be"]
+	path = pyShare-be
+	url = https://github.com/Normal-OJ/pyShare-be.git
+[submodule "pyShare-fe"]
+	path = pyShare-fe
+	url = https://github.com/Normal-OJ/pyShare-fe.git
+[submodule "pyShare-sandbox"]
+	path = pyShare-sandbox
+	url = https://github.com/Normal-OJ/pyShare-sandbox.git
